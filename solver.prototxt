@@ -1,0 +1,25 @@
+net: "MobileNetSSD_train.prototxt"
+#test_iter: 673
+#test_interval: 4000
+base_lr: 0.001000000000476
+display: 10
+max_iter: 120000
+lr_policy: "multistep"
+gamma: 0.50000000149
+weight_decay: 0.00000000000023749
+snapshot: 1000
+snapshot_prefix: "snapshot/snapshot_"
+solver_mode: GPU
+debug_info: false
+snapshot_after_train: true
+#test_initialization: false
+average_loss: 10
+stepvalue: 1000
+stepvalue: 4000
+stepvalue: 20000
+stepvalue: 80000
+iter_size: 1
+type: "RMSProp"
+eval_type: "detection"
+ap_version: "11point"
+
