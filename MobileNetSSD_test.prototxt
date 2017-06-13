@@ -5,11 +5,10 @@ layer {
   top: "data"
   top: "label"
   include {
-    phase: TRAIN
+    phase: TEST
   }
   transform_param {
     scale: 0.017
-    mirror: true
     mean_value: 103.94
     mean_value: 116.78
     mean_value: 123.68
@@ -19,121 +18,17 @@ layer {
       height: 300
       width: 300
       interp_mode: LINEAR
-      interp_mode: AREA
-      interp_mode: NEAREST
-      interp_mode: CUBIC
-      interp_mode: LANCZOS4
-    }
-    emit_constraint {
-      emit_type: CENTER
-    }
-    distort_param {
-      brightness_prob: 0.5
-      brightness_delta: 32.0
-      contrast_prob: 0.5
-      contrast_lower: 0.5
-      contrast_upper: 1.5
-      hue_prob: 0.5
-      hue_delta: 18.0
-      saturation_prob: 0.5
-      saturation_lower: 0.5
-      saturation_upper: 1.5
-      random_order_prob: 0.0
-    }
-    expand_param {
-      prob: 0.5
-      max_expand_ratio: 4.0
     }
   }
   data_param {
     source: "/home/yaochuanqi/data/VOCdevkit/VOC0712/lmdb/VOC0712_trainval_lmdb/"
-    batch_size: 32
+    batch_size: 1
     backend: LMDB
   }
   annotated_data_param {
     batch_sampler {
-      max_sample: 1
-      max_trials: 1
     }
-    batch_sampler {
-      sampler {
-        min_scale: 0.300000011921
-        max_scale: 1.0
-        min_aspect_ratio: 0.5
-        max_aspect_ratio: 2.0
-      }
-      sample_constraint {
-        min_jaccard_overlap: 0.10000000149
-      }
-      max_sample: 1
-      max_trials: 50
-    }
-    batch_sampler {
-      sampler {
-        min_scale: 0.300000011921
-        max_scale: 1.0
-        min_aspect_ratio: 0.5
-        max_aspect_ratio: 2.0
-      }
-      sample_constraint {
-        min_jaccard_overlap: 0.300000011921
-      }
-      max_sample: 1
-      max_trials: 50
-    }
-    batch_sampler {
-      sampler {
-        min_scale: 0.300000011921
-        max_scale: 1.0
-        min_aspect_ratio: 0.5
-        max_aspect_ratio: 2.0
-      }
-      sample_constraint {
-        min_jaccard_overlap: 0.5
-      }
-      max_sample: 1
-      max_trials: 50
-    }
-    batch_sampler {
-      sampler {
-        min_scale: 0.300000011921
-        max_scale: 1.0
-        min_aspect_ratio: 0.5
-        max_aspect_ratio: 2.0
-      }
-      sample_constraint {
-        min_jaccard_overlap: 0.699999988079
-      }
-      max_sample: 1
-      max_trials: 50
-    }
-    batch_sampler {
-      sampler {
-        min_scale: 0.300000011921
-        max_scale: 1.0
-        min_aspect_ratio: 0.5
-        max_aspect_ratio: 2.0
-      }
-      sample_constraint {
-        min_jaccard_overlap: 0.899999976158
-      }
-      max_sample: 1
-      max_trials: 50
-    }
-    batch_sampler {
-      sampler {
-        min_scale: 0.300000011921
-        max_scale: 1.0
-        min_aspect_ratio: 0.5
-        max_aspect_ratio: 2.0
-      }
-      sample_constraint {
-        max_jaccard_overlap: 1.0
-      }
-      max_sample: 1
-      max_trials: 50
-    }
-    label_map_file: "data/VOC0712/labelmap_voc.prototxt"
+    label_map_file: "../../data/VOC0712/labelmap_voc.prototxt"
   }
 }
 layer {
@@ -2949,7 +2844,7 @@ layer {
     shape {
       dim: 0
       dim: -1
-      dim: 22
+      dim: 21
     }
   }
 }
@@ -2982,20 +2877,12 @@ layer {
     phase: TEST
   }
   detection_output_param {
-    num_classes: 22
+    num_classes: 21
     share_location: true
     background_label_id: 0
     nms_param {
       nms_threshold: 0.449999988079
       top_k: 400
-    }
-    save_output_param {
-      output_directory: "data/VOC0712/results/VOC2007/SSD_300x300_score/Main"
-      output_name_prefix: "comp4_det_test_"
-      output_format: "VOC"
-      label_map_file: "data/VOC0712/labelmap_voc.prototxt"
-      name_size_file: "data/VOC0712/test_name_size.txt"
-      num_test_image: 5379
     }
     code_type: CENTER_SIZE
     keep_top_k: 200
@@ -3012,10 +2899,10 @@ layer {
     phase: TEST
   }
   detection_evaluate_param {
-    num_classes: 22
+    num_classes: 21
     background_label_id: 0
     overlap_threshold: 0.5
     evaluate_difficult_gt: false
-    name_size_file: "data/VOC0712/test_name_size.txt"
+    name_size_file: "../../data/VOC0712/test_name_size.txt"
   }
 }
