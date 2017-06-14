@@ -142,8 +142,8 @@ layer {
   bottom: "data"
   top: "conv1"
   param {
-    lr_mult: 0.001
-    decay_mult: 0.001
+    lr_mult: 0.01
+    decay_mult: 0.01
   }
   convolution_param {
     num_output: 32
@@ -180,11 +180,11 @@ layer {
   bottom: "conv1"
   top: "conv1"
   param {
-    lr_mult: 0.001
-    decay_mult: 0.001
+    lr_mult: 0.01
+    decay_mult: 0.01
   }
   param {
-    lr_mult: 0.002
+    lr_mult: 0.02
     decay_mult: 0.0
   }
   scale_param {
@@ -209,8 +209,8 @@ layer {
   bottom: "conv1"
   top: "conv2/dw"
   param {
-    lr_mult: 0.005
-    decay_mult: 0.005
+    lr_mult: 0.05
+    decay_mult: 0.05
   }
   convolution_param {
     num_output: 32
@@ -249,11 +249,11 @@ layer {
   bottom: "conv2/dw"
   top: "conv2/dw"
   param {
-    lr_mult: 0.005
-    decay_mult: 0.005
+    lr_mult: 0.05
+    decay_mult: 0.05
   }
   param {
-    lr_mult: 0.01
+    lr_mult: 0.1
     decay_mult: 0.0
   }
   scale_param {
@@ -278,8 +278,8 @@ layer {
   bottom: "conv2/dw"
   top: "conv2"
   param {
-    lr_mult: 0.005
-    decay_mult: 0.005
+    lr_mult: 0.05
+    decay_mult: 0.05
   }
   convolution_param {
     num_output: 64
@@ -316,11 +316,11 @@ layer {
   bottom: "conv2"
   top: "conv2"
   param {
-    lr_mult: 0.005
-    decay_mult: 0.005
+    lr_mult: 0.05
+    decay_mult: 0.05
   }
   param {
-    lr_mult: 0.01
+    lr_mult: 0.1
     decay_mult: 0.0
   }
   scale_param {
@@ -345,8 +345,8 @@ layer {
   bottom: "conv2"
   top: "conv3/dw"
   param {
-    lr_mult: 0.01
-    decay_mult: 0.01
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     num_output: 64
@@ -385,11 +385,11 @@ layer {
   bottom: "conv3/dw"
   top: "conv3/dw"
   param {
-    lr_mult: 0.01
-    decay_mult: 0.01
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   param {
-    lr_mult: 0.02
+    lr_mult: 0.2
     decay_mult: 0.0
   }
   scale_param {
@@ -414,8 +414,8 @@ layer {
   bottom: "conv3/dw"
   top: "conv3"
   param {
-    lr_mult: 0.01
-    decay_mult: 0.01
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     num_output: 128
@@ -452,11 +452,11 @@ layer {
   bottom: "conv3"
   top: "conv3"
   param {
-    lr_mult: 0.01
-    decay_mult: 0.01
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   param {
-    lr_mult: 0.02
+    lr_mult: 0.2
     decay_mult: 0.0
   }
   scale_param {
