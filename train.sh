@@ -1,4 +1,4 @@
 #!/bin/sh
 ../../build/tools/caffe train -solver="solver.prototxt" \
--weights="MobileNet_nofc.caffemodel" \
+-weights="MobileNetSSD_train.caffemodel"
 -gpu 0 
