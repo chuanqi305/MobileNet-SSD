@@ -23,8 +23,7 @@ A caffe implementation of Google MobileNet SSD detection network, with pretraine
 
   label_map_file: "../../data/VOC0712/labelmap_voc.prototxt" # change to your labelmap file
 ```
-  * Change the mbox_conf layer output num for all 5 mbox_conv layers
-
+  * Change the mbox_conf layer output num for all 5 mbox_conf layers, and change the layer name of 5 mbox_conf.
 ```
   convolution_param {
     num_output: 84 # 84 = 21 * 4, set to (classnum + 1) * 4 , "+1" is for background
@@ -36,7 +35,13 @@ A caffe implementation of Google MobileNet SSD detection network, with pretraine
     num_output: 126 # 126 = 21 * 6, set to (classnum + 1) * 6 , "+1" is for background
     bias_term: false
 ```
-3. Run train.sh After about 30000 iteration, the loss should be 2.0 - 3.0.
+```
+layer {
+  name: "conv11_mbox_conf" #set to a different name, e.g. "conv11_mbox_conf_voc"
+  type: "Convolution"
+  bottom: "conv11"
+```
+3. Run train.sh, after about 30000 iteration, the loss should be 2.0 - 3.0.
 4. Run merge_bn.py to generate your own deploy caffemodel.
      
 ### About some details
