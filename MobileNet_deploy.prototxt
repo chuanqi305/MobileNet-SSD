@@ -1,17 +1,19 @@
 name: "MobileNet"
 input: "data"
-input_dim: 1
-input_dim: 3
-input_dim: 224
-input_dim: 224
+input_shape {
+  dim: 1
+  dim: 3
+  dim: 224
+  dim: 224
+}
 layer {
   name: "conv0"
   type: "Convolution"
   bottom: "data"
   top: "conv0"
   param {
-    lr_mult: 0.1
-    decay_mult: 0.1
+    lr_mult: 1.0
+    decay_mult: 1.0
   }
   convolution_param {
     num_output: 32
@@ -49,7 +51,7 @@ layer {
   top: "conv0"
   param {
     lr_mult: 0.1
-    decay_mult: 0.1
+    decay_mult: 0.0
   }
   param {
     lr_mult: 0.2
@@ -66,7 +68,7 @@ layer {
   }
 }
 layer {
-  name: "relu0"
+  name: "conv0/relu"
   type: "ReLU"
   bottom: "conv0"
   top: "conv0"
@@ -77,8 +79,8 @@ layer {
   bottom: "conv0"
   top: "conv1/dw"
   param {
-    lr_mult: 0.1
-    decay_mult: 0.1
+    lr_mult: 1.0
+    decay_mult: 1.0
   }
   convolution_param {
     num_output: 32
@@ -87,7 +89,6 @@ layer {
     kernel_size: 3
     group: 32
     engine: CAFFE
-    stride: 1
     weight_filler {
       type: "msra"
     }
@@ -118,7 +119,7 @@ layer {
   top: "conv1/dw"
   param {
     lr_mult: 0.1
-    decay_mult: 0.1
+    decay_mult: 0.0
   }
   param {
     lr_mult: 0.2
@@ -135,7 +136,7 @@ layer {
   }
 }
 layer {
-  name: "relu1/dw"
+  name: "conv1/dw/relu"
   type: "ReLU"
   bottom: "conv1/dw"
   top: "conv1/dw"
@@ -146,15 +147,13 @@ layer {
   bottom: "conv1/dw"
   top: "conv1"
   param {
-    lr_mult: 0.1
-    decay_mult: 0.1
+    lr_mult: 1.0
+    decay_mult: 1.0
   }
   convolution_param {
     num_output: 64
     bias_term: false
-    pad: 0
     kernel_size: 1
-    stride: 1
     weight_filler {
       type: "msra"
     }
@@ -185,7 +184,7 @@ layer {
   top: "conv1"
   param {
     lr_mult: 0.1
-    decay_mult: 0.1
+    decay_mult: 0.0
   }
   param {
     lr_mult: 0.2
@@ -202,7 +201,7 @@ layer {
   }
 }
 layer {
-  name: "relu1"
+  name: "conv1/relu"
   type: "ReLU"
   bottom: "conv1"
   top: "conv1"
@@ -213,17 +212,17 @@ layer {
   bottom: "conv1"
   top: "conv2/dw"
   param {
-    lr_mult: 0.1
-    decay_mult: 0.1
+    lr_mult: 1.0
+    decay_mult: 1.0
   }
   convolution_param {
     num_output: 64
     bias_term: false
     pad: 1
     kernel_size: 3
+    stride: 2
     group: 64
     engine: CAFFE
-    stride: 2
     weight_filler {
       type: "msra"
     }
@@ -254,7 +253,7 @@ layer {
   top: "conv2/dw"
   param {
     lr_mult: 0.1
-    decay_mult: 0.1
+    decay_mult: 0.0
   }
   param {
     lr_mult: 0.2
@@ -271,7 +270,7 @@ layer {
   }
 }
 layer {
-  name: "relu2/dw"
+  name: "conv2/dw/relu"
   type: "ReLU"
   bottom: "conv2/dw"
   top: "conv2/dw"
@@ -282,15 +281,13 @@ layer {
   bottom: "conv2/dw"
   top: "conv2"
   param {
-    lr_mult: 0.1
-    decay_mult: 0.1
+    lr_mult: 1.0
+    decay_mult: 1.0
   }
   convolution_param {
     num_output: 128
     bias_term: false
-    pad: 0
     kernel_size: 1
-    stride: 1
     weight_filler {
       type: "msra"
     }
@@ -321,7 +318,7 @@ layer {
   top: "conv2"
   param {
     lr_mult: 0.1
-    decay_mult: 0.1
+    decay_mult: 0.0
   }
   param {
     lr_mult: 0.2
@@ -338,7 +335,7 @@ layer {
   }
 }
 layer {
-  name: "relu2"
+  name: "conv2/relu"
   type: "ReLU"
   bottom: "conv2"
   top: "conv2"
@@ -349,8 +346,8 @@ layer {
   bottom: "conv2"
   top: "conv3/dw"
   param {
-    lr_mult: 0.1
-    decay_mult: 0.1
+    lr_mult: 1.0
+    decay_mult: 1.0
   }
   convolution_param {
     num_output: 128
@@ -359,7 +356,6 @@ layer {
     kernel_size: 3
     group: 128
     engine: CAFFE
-    stride: 1
     weight_filler {
       type: "msra"
     }
@@ -390,7 +386,7 @@ layer {
   top: "conv3/dw"
   param {
     lr_mult: 0.1
-    decay_mult: 0.1
+    decay_mult: 0.0
   }
   param {
     lr_mult: 0.2
@@ -407,7 +403,7 @@ layer {
   }
 }
 layer {
-  name: "relu3/dw"
+  name: "conv3/dw/relu"
   type: "ReLU"
   bottom: "conv3/dw"
   top: "conv3/dw"
@@ -418,15 +414,13 @@ layer {
   bottom: "conv3/dw"
   top: "conv3"
   param {
-    lr_mult: 0.1
-    decay_mult: 0.1
+    lr_mult: 1.0
+    decay_mult: 1.0
   }
   convolution_param {
     num_output: 128
     bias_term: false
-    pad: 0
     kernel_size: 1
-    stride: 1
     weight_filler {
       type: "msra"
     }
@@ -457,7 +451,7 @@ layer {
   top: "conv3"
   param {
     lr_mult: 0.1
-    decay_mult: 0.1
+    decay_mult: 0.0
   }
   param {
     lr_mult: 0.2
@@ -474,7 +468,7 @@ layer {
   }
 }
 layer {
-  name: "relu3"
+  name: "conv3/relu"
   type: "ReLU"
   bottom: "conv3"
   top: "conv3"
@@ -485,17 +479,17 @@ layer {
   bottom: "conv3"
   top: "conv4/dw"
   param {
-    lr_mult: 0.1
-    decay_mult: 0.1
+    lr_mult: 1.0
+    decay_mult: 1.0
   }
   convolution_param {
     num_output: 128
     bias_term: false
     pad: 1
     kernel_size: 3
+    stride: 2
     group: 128
     engine: CAFFE
-    stride: 2
     weight_filler {
       type: "msra"
     }
@@ -526,7 +520,7 @@ layer {
   top: "conv4/dw"
   param {
     lr_mult: 0.1
-    decay_mult: 0.1
+    decay_mult: 0.0
   }
   param {
     lr_mult: 0.2
@@ -543,7 +537,7 @@ layer {
   }
 }
 layer {
-  name: "relu4/dw"
+  name: "conv4/dw/relu"
   type: "ReLU"
   bottom: "conv4/dw"
   top: "conv4/dw"
@@ -554,15 +548,13 @@ layer {
   bottom: "conv4/dw"
   top: "conv4"
   param {
-    lr_mult: 0.1
-    decay_mult: 0.1
+    lr_mult: 1.0
+    decay_mult: 1.0
   }
   convolution_param {
     num_output: 256
     bias_term: false
-    pad: 0
     kernel_size: 1
-    stride: 1
     weight_filler {
       type: "msra"
     }
@@ -593,7 +585,7 @@ layer {
   top: "conv4"
   param {
     lr_mult: 0.1
-    decay_mult: 0.1
+    decay_mult: 0.0
   }
   param {
     lr_mult: 0.2
@@ -610,7 +602,7 @@ layer {
   }
 }
 layer {
-  name: "relu4"
+  name: "conv4/relu"
   type: "ReLU"
   bottom: "conv4"
   top: "conv4"
@@ -621,8 +613,8 @@ layer {
   bottom: "conv4"
   top: "conv5/dw"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 1.0
+    decay_mult: 1.0
   }
   convolution_param {
     num_output: 256
@@ -631,7 +623,6 @@ layer {
     kernel_size: 3
     group: 256
     engine: CAFFE
-    stride: 1
     weight_filler {
       type: "msra"
     }
@@ -660,6 +651,14 @@ layer {
   type: "Scale"
   bottom: "conv5/dw"
   top: "conv5/dw"
+  param {
+    lr_mult: 0.1
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.2
+    decay_mult: 0.0
+  }
   scale_param {
     filler {
       value: 1
@@ -671,7 +670,7 @@ layer {
   }
 }
 layer {
-  name: "relu5/dw"
+  name: "conv5/dw/relu"
   type: "ReLU"
   bottom: "conv5/dw"
   top: "conv5/dw"
@@ -682,15 +681,13 @@ layer {
   bottom: "conv5/dw"
   top: "conv5"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 1.0
+    decay_mult: 1.0
   }
   convolution_param {
     num_output: 256
     bias_term: false
-    pad: 0
     kernel_size: 1
-    stride: 1
     weight_filler {
       type: "msra"
     }
@@ -719,6 +716,14 @@ layer {
   type: "Scale"
   bottom: "conv5"
   top: "conv5"
+  param {
+    lr_mult: 0.1
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.2
+    decay_mult: 0.0
+  }
   scale_param {
     filler {
       value: 1
@@ -730,7 +735,7 @@ layer {
   }
 }
 layer {
-  name: "relu5"
+  name: "conv5/relu"
   type: "ReLU"
   bottom: "conv5"
   top: "conv5"
@@ -741,17 +746,17 @@ layer {
   bottom: "conv5"
   top: "conv6/dw"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 1.0
+    decay_mult: 1.0
   }
   convolution_param {
     num_output: 256
     bias_term: false
     pad: 1
     kernel_size: 3
+    stride: 2
     group: 256
     engine: CAFFE
-    stride: 2
     weight_filler {
       type: "msra"
     }
@@ -780,6 +785,14 @@ layer {
   type: "Scale"
   bottom: "conv6/dw"
   top: "conv6/dw"
+  param {
+    lr_mult: 0.1
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.2
+    decay_mult: 0.0
+  }
   scale_param {
     filler {
       value: 1
@@ -791,7 +804,7 @@ layer {
   }
 }
 layer {
-  name: "relu6/dw"
+  name: "conv6/dw/relu"
   type: "ReLU"
   bottom: "conv6/dw"
   top: "conv6/dw"
@@ -802,15 +815,13 @@ layer {
   bottom: "conv6/dw"
   top: "conv6"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 1.0
+    decay_mult: 1.0
   }
   convolution_param {
     num_output: 512
     bias_term: false
-    pad: 0
     kernel_size: 1
-    stride: 1
     weight_filler {
       type: "msra"
     }
@@ -839,6 +850,14 @@ layer {
   type: "Scale"
   bottom: "conv6"
   top: "conv6"
+  param {
+    lr_mult: 0.1
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.2
+    decay_mult: 0.0
+  }
   scale_param {
     filler {
       value: 1
@@ -850,7 +869,7 @@ layer {
   }
 }
 layer {
-  name: "relu6"
+  name: "conv6/relu"
   type: "ReLU"
   bottom: "conv6"
   top: "conv6"
@@ -861,8 +880,8 @@ layer {
   bottom: "conv6"
   top: "conv7/dw"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 1.0
+    decay_mult: 1.0
   }
   convolution_param {
     num_output: 512
@@ -871,7 +890,6 @@ layer {
     kernel_size: 3
     group: 512
     engine: CAFFE
-    stride: 1
     weight_filler {
       type: "msra"
     }
@@ -900,6 +918,14 @@ layer {
   type: "Scale"
   bottom: "conv7/dw"
   top: "conv7/dw"
+  param {
+    lr_mult: 0.1
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.2
+    decay_mult: 0.0
+  }
   scale_param {
     filler {
       value: 1
@@ -911,7 +937,7 @@ layer {
   }
 }
 layer {
-  name: "relu7/dw"
+  name: "conv7/dw/relu"
   type: "ReLU"
   bottom: "conv7/dw"
   top: "conv7/dw"
@@ -922,15 +948,13 @@ layer {
   bottom: "conv7/dw"
   top: "conv7"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 1.0
+    decay_mult: 1.0
   }
   convolution_param {
     num_output: 512
     bias_term: false
-    pad: 0
     kernel_size: 1
-    stride: 1
     weight_filler {
       type: "msra"
     }
@@ -959,6 +983,14 @@ layer {
   type: "Scale"
   bottom: "conv7"
   top: "conv7"
+  param {
+    lr_mult: 0.1
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.2
+    decay_mult: 0.0
+  }
   scale_param {
     filler {
       value: 1
@@ -970,7 +1002,7 @@ layer {
   }
 }
 layer {
-  name: "relu7"
+  name: "conv7/relu"
   type: "ReLU"
   bottom: "conv7"
   top: "conv7"
@@ -981,8 +1013,8 @@ layer {
   bottom: "conv7"
   top: "conv8/dw"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 1.0
+    decay_mult: 1.0
   }
   convolution_param {
     num_output: 512
@@ -991,7 +1023,6 @@ layer {
     kernel_size: 3
     group: 512
     engine: CAFFE
-    stride: 1
     weight_filler {
       type: "msra"
     }
@@ -1020,6 +1051,14 @@ layer {
   type: "Scale"
   bottom: "conv8/dw"
   top: "conv8/dw"
+  param {
+    lr_mult: 0.1
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.2
+    decay_mult: 0.0
+  }
   scale_param {
     filler {
       value: 1
@@ -1031,7 +1070,7 @@ layer {
   }
 }
 layer {
-  name: "relu8/dw"
+  name: "conv8/dw/relu"
   type: "ReLU"
   bottom: "conv8/dw"
   top: "conv8/dw"
@@ -1042,15 +1081,13 @@ layer {
   bottom: "conv8/dw"
   top: "conv8"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 1.0
+    decay_mult: 1.0
   }
   convolution_param {
     num_output: 512
     bias_term: false
-    pad: 0
     kernel_size: 1
-    stride: 1
     weight_filler {
       type: "msra"
     }
@@ -1079,6 +1116,14 @@ layer {
   type: "Scale"
   bottom: "conv8"
   top: "conv8"
+  param {
+    lr_mult: 0.1
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.2
+    decay_mult: 0.0
+  }
   scale_param {
     filler {
       value: 1
@@ -1090,7 +1135,7 @@ layer {
   }
 }
 layer {
-  name: "relu8"
+  name: "conv8/relu"
   type: "ReLU"
   bottom: "conv8"
   top: "conv8"
@@ -1101,8 +1146,8 @@ layer {
   bottom: "conv8"
   top: "conv9/dw"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 1.0
+    decay_mult: 1.0
   }
   convolution_param {
     num_output: 512
@@ -1111,7 +1156,6 @@ layer {
     kernel_size: 3
     group: 512
     engine: CAFFE
-    stride: 1
     weight_filler {
       type: "msra"
     }
@@ -1140,6 +1184,14 @@ layer {
   type: "Scale"
   bottom: "conv9/dw"
   top: "conv9/dw"
+  param {
+    lr_mult: 0.1
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.2
+    decay_mult: 0.0
+  }
   scale_param {
     filler {
       value: 1
@@ -1151,7 +1203,7 @@ layer {
   }
 }
 layer {
-  name: "relu9/dw"
+  name: "conv9/dw/relu"
   type: "ReLU"
   bottom: "conv9/dw"
   top: "conv9/dw"
@@ -1162,15 +1214,13 @@ layer {
   bottom: "conv9/dw"
   top: "conv9"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 1.0
+    decay_mult: 1.0
   }
   convolution_param {
     num_output: 512
     bias_term: false
-    pad: 0
     kernel_size: 1
-    stride: 1
     weight_filler {
       type: "msra"
     }
@@ -1199,6 +1249,14 @@ layer {
   type: "Scale"
   bottom: "conv9"
   top: "conv9"
+  param {
+    lr_mult: 0.1
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.2
+    decay_mult: 0.0
+  }
   scale_param {
     filler {
       value: 1
@@ -1210,7 +1268,7 @@ layer {
   }
 }
 layer {
-  name: "relu9"
+  name: "conv9/relu"
   type: "ReLU"
   bottom: "conv9"
   top: "conv9"
@@ -1221,8 +1279,8 @@ layer {
   bottom: "conv9"
   top: "conv10/dw"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 1.0
+    decay_mult: 1.0
   }
   convolution_param {
     num_output: 512
@@ -1231,7 +1289,6 @@ layer {
     kernel_size: 3
     group: 512
     engine: CAFFE
-    stride: 1
     weight_filler {
       type: "msra"
     }
@@ -1260,6 +1317,14 @@ layer {
   type: "Scale"
   bottom: "conv10/dw"
   top: "conv10/dw"
+  param {
+    lr_mult: 0.1
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.2
+    decay_mult: 0.0
+  }
   scale_param {
     filler {
       value: 1
@@ -1271,7 +1336,7 @@ layer {
   }
 }
 layer {
-  name: "relu10/dw"
+  name: "conv10/dw/relu"
   type: "ReLU"
   bottom: "conv10/dw"
   top: "conv10/dw"
@@ -1282,15 +1347,13 @@ layer {
   bottom: "conv10/dw"
   top: "conv10"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 1.0
+    decay_mult: 1.0
   }
   convolution_param {
     num_output: 512
     bias_term: false
-    pad: 0
     kernel_size: 1
-    stride: 1
     weight_filler {
       type: "msra"
     }
@@ -1319,6 +1382,14 @@ layer {
   type: "Scale"
   bottom: "conv10"
   top: "conv10"
+  param {
+    lr_mult: 0.1
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.2
+    decay_mult: 0.0
+  }
   scale_param {
     filler {
       value: 1
@@ -1330,7 +1401,7 @@ layer {
   }
 }
 layer {
-  name: "relu10"
+  name: "conv10/relu"
   type: "ReLU"
   bottom: "conv10"
   top: "conv10"
@@ -1341,8 +1412,8 @@ layer {
   bottom: "conv10"
   top: "conv11/dw"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 1.0
+    decay_mult: 1.0
   }
   convolution_param {
     num_output: 512
@@ -1351,7 +1422,6 @@ layer {
     kernel_size: 3
     group: 512
     engine: CAFFE
-    stride: 1
     weight_filler {
       type: "msra"
     }
@@ -1380,6 +1450,14 @@ layer {
   type: "Scale"
   bottom: "conv11/dw"
   top: "conv11/dw"
+  param {
+    lr_mult: 0.1
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.2
+    decay_mult: 0.0
+  }
   scale_param {
     filler {
       value: 1
@@ -1391,7 +1469,7 @@ layer {
   }
 }
 layer {
-  name: "relu11/dw"
+  name: "conv11/dw/relu"
   type: "ReLU"
   bottom: "conv11/dw"
   top: "conv11/dw"
@@ -1402,15 +1480,13 @@ layer {
   bottom: "conv11/dw"
   top: "conv11"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 1.0
+    decay_mult: 1.0
   }
   convolution_param {
     num_output: 512
     bias_term: false
-    pad: 0
     kernel_size: 1
-    stride: 1
     weight_filler {
       type: "msra"
     }
@@ -1439,6 +1515,14 @@ layer {
   type: "Scale"
   bottom: "conv11"
   top: "conv11"
+  param {
+    lr_mult: 0.1
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.2
+    decay_mult: 0.0
+  }
   scale_param {
     filler {
       value: 1
@@ -1450,7 +1534,7 @@ layer {
   }
 }
 layer {
-  name: "relu11"
+  name: "conv11/relu"
   type: "ReLU"
   bottom: "conv11"
   top: "conv11"
@@ -1461,17 +1545,17 @@ layer {
   bottom: "conv11"
   top: "conv12/dw"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 1.0
+    decay_mult: 1.0
   }
   convolution_param {
     num_output: 512
     bias_term: false
     pad: 1
     kernel_size: 3
+    stride: 2
     group: 512
     engine: CAFFE
-    stride: 2
     weight_filler {
       type: "msra"
     }
@@ -1500,6 +1584,14 @@ layer {
   type: "Scale"
   bottom: "conv12/dw"
   top: "conv12/dw"
+  param {
+    lr_mult: 0.1
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.2
+    decay_mult: 0.0
+  }
   scale_param {
     filler {
       value: 1
@@ -1511,7 +1603,7 @@ layer {
   }
 }
 layer {
-  name: "relu12/dw"
+  name: "conv12/dw/relu"
   type: "ReLU"
   bottom: "conv12/dw"
   top: "conv12/dw"
@@ -1522,15 +1614,13 @@ layer {
   bottom: "conv12/dw"
   top: "conv12"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 1.0
+    decay_mult: 1.0
   }
   convolution_param {
     num_output: 1024
     bias_term: false
-    pad: 0
     kernel_size: 1
-    stride: 1
     weight_filler {
       type: "msra"
     }
@@ -1559,6 +1649,14 @@ layer {
   type: "Scale"
   bottom: "conv12"
   top: "conv12"
+  param {
+    lr_mult: 0.1
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.2
+    decay_mult: 0.0
+  }
   scale_param {
     filler {
       value: 1
@@ -1570,7 +1668,7 @@ layer {
   }
 }
 layer {
-  name: "relu12"
+  name: "conv12/relu"
   type: "ReLU"
   bottom: "conv12"
   top: "conv12"
@@ -1581,8 +1679,8 @@ layer {
   bottom: "conv12"
   top: "conv13/dw"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 1.0
+    decay_mult: 1.0
   }
   convolution_param {
     num_output: 1024
@@ -1591,7 +1689,6 @@ layer {
     kernel_size: 3
     group: 1024
     engine: CAFFE
-    stride: 1
     weight_filler {
       type: "msra"
     }
@@ -1620,6 +1717,14 @@ layer {
   type: "Scale"
   bottom: "conv13/dw"
   top: "conv13/dw"
+  param {
+    lr_mult: 0.1
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.2
+    decay_mult: 0.0
+  }
   scale_param {
     filler {
       value: 1
@@ -1631,7 +1736,7 @@ layer {
   }
 }
 layer {
-  name: "relu13/dw"
+  name: "conv13/dw/relu"
   type: "ReLU"
   bottom: "conv13/dw"
   top: "conv13/dw"
@@ -1642,15 +1747,13 @@ layer {
   bottom: "conv13/dw"
   top: "conv13"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 1.0
+    decay_mult: 1.0
   }
   convolution_param {
     num_output: 1024
     bias_term: false
-    pad: 0
     kernel_size: 1
-    stride: 1
     weight_filler {
       type: "msra"
     }
@@ -1679,6 +1782,14 @@ layer {
   type: "Scale"
   bottom: "conv13"
   top: "conv13"
+  param {
+    lr_mult: 0.1
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.2
+    decay_mult: 0.0
+  }
   scale_param {
     filler {
       value: 1
@@ -1690,7 +1801,7 @@ layer {
   }
 }
 layer {
-  name: "relu13"
+  name: "conv13/relu"
   type: "ReLU"
   bottom: "conv13"
   top: "conv13"
@@ -1711,12 +1822,12 @@ layer {
   bottom: "pool"
   top: "fc"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 1.0
+    decay_mult: 1.0
   }
   param {
-    lr_mult: 2
-    decay_mult: 0
+    lr_mult: 2.0
+    decay_mult: 0.0
   }
   convolution_param {
     num_output: 1001
@@ -1726,7 +1837,7 @@ layer {
     }
     bias_filler {
       type: "constant"
-      value: 0
+      value: 0.0
     }
   }
 }

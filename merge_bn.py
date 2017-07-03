@@ -1,11 +1,8 @@
 import numpy as np  
 import sys,os  
-from scipy import misc
-import cv2
-caffe_root = '/home/yaochuanqi/ssd/'
+caffe_root = '../../'
 sys.path.insert(0, caffe_root + 'python')  
 import caffe  
-
 
 train_proto = 'MobileNetSSD_train.prototxt'  
 train_model = 'MobileNetSSD_train.caffemodel'  #should be your snapshot caffemodel, e.g. mobilnetnet_iter_72000.caffemodel
@@ -28,7 +25,8 @@ def merge_bn(net, nob):
             else:
                 conv = net.params[key]
                 if not net.params.has_key(key + "/bn"):
-                    nob.params[key] = conv
+                    for i, w in enumerate(conv):
+                        nob.params[key][i].data[...] = w.data
                 else:
                     bn = net.params[key + "/bn"]
                     scale = net.params[key + "/scale"]
@@ -45,7 +43,7 @@ def merge_bn(net, nob):
                     shift = scale[1].data
 
                     if scalef != 0:
-                       scalef = 1. / scalef
+                        scalef = 1. / scalef
                     mean = mean * scalef
                     var = var * scalef
                     rstd = 1. / np.sqrt(var + 1e-5)

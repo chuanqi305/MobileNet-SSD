@@ -2,13 +2,13 @@ import numpy as np
 import sys,os  
 from scipy import misc
 import cv2
-caffe_root = '../../'
+caffe_root = '/home/yaochuanqi/caffe/'
 sys.path.insert(0, caffe_root + 'python')  
 import caffe  
 
   
 net_file= 'MobileNet_deploy.prototxt'  
-caffe_model='MobileNet_deploy.caffemodel'  
+caffe_model='MobileNet_deploy.caffemodel'
 net = caffe.Net(net_file,caffe_model,caffe.TEST)  
 
 img = cv2.imread('images/000067.jpg')
@@ -28,3 +28,4 @@ output_prob = out['fc'].reshape((1001))
 idx = np.argmax(output_prob)
 print(idx)
 print(output_prob[idx])
+net.save("new.caffemodel")
