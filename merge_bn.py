@@ -1,6 +1,6 @@
 import numpy as np  
 import sys,os  
-caffe_root = '../../'
+caffe_root = '/home/yaochuanqi/ssd/caffe/'
 sys.path.insert(0, caffe_root + 'python')  
 import caffe  
 

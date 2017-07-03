@@ -294,7 +294,7 @@ layer {
     }
     code_type: CENTER_SIZE
     keep_top_k: 100
-    confidence_threshold: 0.3
+    confidence_threshold: 0.25
   }
 }""" % (self.class_num, self.class_num))
 
