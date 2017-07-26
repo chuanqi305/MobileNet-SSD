@@ -1,52 +1,31 @@
 # MobileNet-SSD
-A caffe implementation of Google MobileNet SSD detection network, with pretrained weights on VOC0712.
+A caffe implementation of MobileNet-SSD detection network, with pretrained weights on VOC0712 and mAP=0.727.
+
+Network|mAP|Download|Download
+:---:|:---:|:---:|:---:
+MobileNet-SSD|72.7|[train](https://drive.google.com/open?id=0B3gersZ2cHIxVFI1Rjd5aDgwOG8)|[deploy](https://drive.google.com/open?id=0B3gersZ2cHIxRm5PMWRoTkdHdHc)
 
 ### Run
 1. Download [SSD](https://github.com/weiliu89/caffe/tree/ssd) source code and compile (follow the SSD README).
-2. Put all the files in SSD_HOME/examples/
-3. Run merge_bn.py to generate deploy caffemodel.
-4. Run demo.py to test the detection result.
+2. Download the pretrained deploy weights from the link above.
+3. Put all the files in SSD_HOME/examples/
+4. Run demo.py to show the detection result.
 
 
 ### Train your own dataset
-1. Convert your own dataset to lmdb database (follow the SSD README).
-2. Modify the MobileNetSSD_train.prototxt like this (or use gen.py):
-  * Change the lmdb database and labelmap file path.
+1. Convert your own dataset to lmdb database (follow the SSD README), and create symlinks to current directory.
 ```
-  data_param {
-    source: "/home/yaochuanqi/data/VOCdevkit/VOC0712/lmdb/VOC0712_trainval_lmdb" # change to your lmdb path
-    batch_size: 32
-    backend: LMDB
-  }
-
-   ...
-
-  label_map_file: "../../data/VOC0712/labelmap_voc.prototxt" # change to your labelmap file
+ln -s PATH_TO_YOUR_TRAIN_LMDB trainval_lmdb
+ln -s PATH_TO_YOUR_TEST_LMDB test_lmdb
 ```
-  * Change the mbox_conf layer output num for all 5 mbox_conf layers, and change the layer name of 5 mbox_conf.
-```
-  convolution_param {
-    num_output: 84 # 84 = 21 * 4, set to (classnum + 1) * 4 , "+1" is for background
-    bias_term: false
-
-  ...
-
-  convolution_param {
-    num_output: 126 # 126 = 21 * 6, set to (classnum + 1) * 6 , "+1" is for background
-    bias_term: false
-```
-```
-layer {
-  name: "conv11_mbox_conf" #set to a different name, e.g. "conv11_mbox_conf_voc"
-  type: "Convolution"
-  bottom: "conv11"
-```
-3. Run train.sh, after about 30000 iteration, the loss should be 2.0 - 3.0.
-4. Run merge_bn.py to generate your own deploy caffemodel.
+2. Create the labelmap.prototxt file and put it into current directory.
+3. Use gen_model.sh to generate your own training model.
+4. Download the MobileNetSSD_train.caffemodel from the link above, and run train.sh, after about 30000 iterations, the loss should be 1.5 - 2.5.
+5. Run test.sh to evaluate the result.
+6. Run merge_bn.py to generate your own deploy caffemodel.
      
 ### About some details
-There are 3 differences between my model and [MobileNet-SSD on tensorflow](https://github.com/tensorflow/models/blob/master/object_detection/g3doc/detection_model_zoo.md):
-1. I replaced the tensorflow's ReLU6 layer with ReLU.
-2. My batch normal eps=0.00001 vs tensorflow's eps=0.001.
-3. For the conv11 anchors, I use [(0.2, 1.0), (0.2, 2.0), (0.2, 0.5)] vs tensorflow's [(0.1, 1.0), (0.2, 2.0), (0.2, 0.5)].
+There are 2 primary differences between this model and [MobileNet-SSD on tensorflow](https://github.com/tensorflow/models/blob/master/object_detection/g3doc/detection_model_zoo.md):
+1. ReLU6 layer is replaced by ReLU.
+2. For the conv11_mbox_prior layer, the anchors is [(0.2, 1.0), (0.2, 2.0), (0.2, 0.5)] vs tensorflow's [(0.1, 1.0), (0.2, 2.0), (0.2, 0.5)].
 
