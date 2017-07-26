@@ -28,4 +28,3 @@ ln -s PATH_TO_YOUR_TEST_LMDB test_lmdb
 There are 2 primary differences between this model and [MobileNet-SSD on tensorflow](https://github.com/tensorflow/models/blob/master/object_detection/g3doc/detection_model_zoo.md):
 1. ReLU6 layer is replaced by ReLU.
 2. For the conv11_mbox_prior layer, the anchors is [(0.2, 1.0), (0.2, 2.0), (0.2, 0.5)] vs tensorflow's [(0.1, 1.0), (0.2, 2.0), (0.2, 0.5)].
-
