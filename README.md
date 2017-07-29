@@ -20,7 +20,7 @@ ln -s PATH_TO_YOUR_TEST_LMDB test_lmdb
 ```
 2. Create the labelmap.prototxt file and put it into current directory.
 3. Use gen_model.sh to generate your own training model.
-4. Download the MobileNetSSD_train.caffemodel from the link above, and run train.sh, after about 30000 iterations, the loss should be 1.5 - 2.5.
+4. Download the train model from the link above, and run train.sh, after about 30000 iterations, the loss should be 1.5 - 2.5.
 5. Run test.sh to evaluate the result.
 6. Run merge_bn.py to generate your own deploy caffemodel.
      

@@ -5,7 +5,7 @@ sys.path.insert(0, caffe_root + 'python')
 import caffe  
 
 train_proto = 'MobileNetSSD_train.prototxt'  
-train_model = 'MobileNetSSD_train.caffemodel'  #should be your snapshot caffemodel, e.g. mobilnetnet_iter_72000.caffemodel
+train_model = 'mobilenet_iter_73000.caffemodel'  #should be your snapshot caffemodel
 
 deploy_proto = 'MobileNetSSD_deploy.prototxt'  
 save_model = 'MobileNetSSD_deploy.caffemodel'
