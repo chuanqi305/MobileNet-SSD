@@ -207,7 +207,7 @@ input_shape {
   }
   data_param {
     source: "%s"
-    batch_size: 1
+    batch_size: 8
     backend: LMDB
   }
   annotated_data_param {
@@ -518,11 +518,11 @@ layer {
   bottom: "%s"
   top: "%s"
   param {
-    lr_mult: 0.1
+    lr_mult: 1.0
     decay_mult: 0.0
   }
   param {
-    lr_mult: 0.2
+    lr_mult: 2.0
     decay_mult: 0.0
   }
   scale_param {
