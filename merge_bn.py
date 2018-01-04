@@ -18,13 +18,17 @@ def merge_bn(net, nob):
     w = w * rstd * scale
     b = (b - mean) * rstd * scale + shift
     '''
-    for key in net.params.iterkeys():
+    if sys.version_info >= (3,0):
+        listKeys = net.params.keys()
+    else:
+        listKeys = net.params.iterkeys()
+    for key in listKeys:
         if type(net.params[key]) is caffe._caffe.BlobVec:
             if key.endswith("/bn") or key.endswith("/scale"):
 		continue
             else:
                 conv = net.params[key]
-                if not net.params.has_key(key + "/bn"):
+                if (key + "/bn") not in net.params:
                     for i, w in enumerate(conv):
                         nob.params[key][i].data[...] = w.data
                 else:
