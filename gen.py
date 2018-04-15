@@ -364,12 +364,12 @@ layer {
     phase: TEST
   }
   detection_evaluate_param {
-    num_classes: 21
+    num_classes: %d
     background_label_id: 0
     overlap_threshold: 0.5
     evaluate_difficult_gt: false
   }
-}""" % (self.class_num, self.class_num))
+}""" % (self.class_num, self.class_num, self.class_num))
 
     def ssd_loss(self):
       print(
