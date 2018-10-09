@@ -1,7 +1,7 @@
 import numpy as np  
 import sys,os  
 import cv2
-caffe_root = '/home/yaochuanqi/ssd/caffe/'
+caffe_root = '/home/yaochuanqi/work/ssd/caffe/'
 sys.path.insert(0, caffe_root + 'python')  
 import caffe  
 
@@ -11,7 +11,7 @@ caffe_model='MobileNetSSD_deploy.caffemodel'
 test_dir = "images"
 
 if not os.path.exists(caffe_model):
-    print("MobileNetSSD_deploy.affemodel does not exist,")
+    print("MobileNetSSD_deploy.caffemodel does not exist,")
     print("use merge_bn.py to generate it.")
     exit()
 net = caffe.Net(net_file,caffe_model,caffe.TEST)  
