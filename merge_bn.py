@@ -32,7 +32,7 @@ def find_top_after_bn(layers, name, top):
             bn_maps[name]["scale"] = l.name
             top = l.top[0]
     return top
-       
+
 def pre_process(expected_proto, new_proto):
     net_specs = caffe_pb2.NetParameter()
     net_specs2 = caffe_pb2.NetParameter()
