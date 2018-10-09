@@ -46,7 +46,7 @@ def pre_process(expected_proto, new_proto):
     for i in range(num_layers - 1, -1, -1):
          del net_specs2.layer[i]
 
-    for idx in xrange(num_layers):
+    for idx in range(num_layers):
         l = layers[idx]
         if l.type == "BatchNorm" or l.type == "Scale":
             continue
