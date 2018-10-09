@@ -6,7 +6,7 @@ sys.path.insert(0, caffe_root + 'python')
 import caffe  
 
 
-net_file= 'deploy.prototxt'  
+net_file= 'MobileNetSSD_deploy.prototxt'  
 caffe_model='MobileNetSSD_deploy.caffemodel'  
 test_dir = "images"
 
