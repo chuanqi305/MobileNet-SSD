@@ -65,14 +65,18 @@ def pre_process(expected_proto, new_proto):
         fp.write("{}".format(net_specs2))
 
 def load_weights(net, nobn):
-    for key in nobn.params.iterkeys():
+    if sys.version_info > (3,0):
+        listKeys = nobn.params.keys()
+    else:
+        listKeys = nobn.params.iterkeys()
+    for key in listKeys:
         if type(nobn.params[key]) is caffe._caffe.BlobVec:
             conv = net.params[key]
             if key not in bn_maps or "bn" not in bn_maps[key]:
                 for i, w in enumerate(conv):
                     nobn.params[key][i].data[...] = w.data
             else:
-                print key
+                print(key)
                 bn = net.params[bn_maps[key]["bn"]]
                 scale = net.params[bn_maps[key]["scale"]]
                 wt = conv[0].data
@@ -82,7 +86,7 @@ def load_weights(net, nobn):
                 elif bn_maps[key]["type"] == "Deconvolution": 
                     channels = wt.shape[1]
                 else:
-                    print "error type " + bn_maps[key]["type"]
+                    print("error type " + bn_maps[key]["type"])
                     exit(-1)
                 bias = np.zeros(channels)
                 if len(conv) > 1:
