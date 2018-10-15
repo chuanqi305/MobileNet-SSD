@@ -10,7 +10,7 @@ MobileNet-SSD|72.7|[train](https://drive.google.com/open?id=0B3gersZ2cHIxVFI1Rjd
 2. Download the pretrained deploy weights from the link above.
 3. Put all the files in SSD_HOME/examples/
 4. Run demo.py to show the detection result.
-5. You can run merge_bn.py to generate a no bn model, it will be a little faster.
+5. You can run merge_bn.py to generate a no bn model, it will be much faster.
 
 ### Train your own dataset
 1. Convert your own dataset to lmdb database (follow the SSD README), and create symlinks to current directory.
@@ -34,3 +34,6 @@ There are 2 primary differences between this model and [MobileNet-SSD on tensorf
 
 ### Reproduce the result
 I trained this model from a MobileNet classifier([caffemodel](https://drive.google.com/open?id=0B3gersZ2cHIxZi13UWF0OXBsZzA) and [prototxt](https://drive.google.com/open?id=0B3gersZ2cHIxWGEzbG5nSXpNQzA)) converted from [tensorflow](http://download.tensorflow.org/models/mobilenet_v1_1.0_224_2017_06_14.tar.gz). I first trained the model on MS-COCO and then fine-tuned on VOC0712. Without MS-COCO pretraining, it can only get mAP=0.68.
+
+### Mobile Platform
+You can run it on Android with my another project [rscnn](https://github.com/chuanqi305/rscnn), and the IOS version will be coming soon.
