@@ -6,13 +6,15 @@ sys.path.insert(0, caffe_root + 'python')
 import caffe  
 
 
-net_file= 'MobileNetSSD_deploy.prototxt'  
-caffe_model='MobileNetSSD_deploy.caffemodel'  
+net_file= 'deploy.prototxt'  
+caffe_model='mobilenet_iter_73000.caffemodel'  
 test_dir = "images"
 
 if not os.path.exists(caffe_model):
-    print("MobileNetSSD_deploy.caffemodel does not exist,")
-    print("use merge_bn.py to generate it.")
+    print(caffe_model + " does not exist")
+    exit()
+if not os.path.exists(net_file):
+    print(net_file + " does not exist")
     exit()
 net = caffe.Net(net_file,caffe_model,caffe.TEST)  
 
