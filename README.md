@@ -36,4 +36,4 @@ There are 2 primary differences between this model and [MobileNet-SSD on tensorf
 I trained this model from a MobileNet classifier([caffemodel](https://drive.google.com/open?id=0B3gersZ2cHIxZi13UWF0OXBsZzA) and [prototxt](https://drive.google.com/open?id=0B3gersZ2cHIxWGEzbG5nSXpNQzA)) converted from [tensorflow](http://download.tensorflow.org/models/mobilenet_v1_1.0_224_2017_06_14.tar.gz). I first trained the model on MS-COCO and then fine-tuned on VOC0712. Without MS-COCO pretraining, it can only get mAP=0.68.
 
 ### Mobile Platform
-You can run it on Android with my another project [rscnn](https://github.com/chuanqi305/rscnn), and the IOS version will be coming soon.
+You can run it on Android with my another project [rscnn](https://github.com/chuanqi305/rscnn).
