@@ -20,6 +20,8 @@ MobileNet-SSD|72.7|[train](https://drive.google.com/open?id=0B3gersZ2cHIxVFI1Rjd
 5. run ```bash create_data.sh``` , which will generate the LMDB in Dataset directory.
 6. Delete trainval.txt, test.txt, test_name_size.txt before creation of next LMDB.
 
+LMDB Creation part is taken from https://github.com/jinfagang/kitti-ssd
+
 
 ### Train your own dataset
 1. Convert your own dataset to lmdb database (follow the SSD README), and create symlinks to current directory.
