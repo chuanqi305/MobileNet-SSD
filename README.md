@@ -16,11 +16,11 @@ MobileNet-SSD|72.7|[train](https://drive.google.com/open?id=0B3gersZ2cHIxVFI1Rjd
 1. Place the Images and Labels into same directory. (Each image in Images folder should have a unique label file in Labels folder with same name)
 2. Modify the labelmap.prototxt file according to your classes.
 3. Modify the paths and directories in create_list.sh and create_data.sh as specified in same file in comments.
-4. run ```bash create_list.sh``` , which will create trainval.txt, test.txt and test_name_size.txt
-5. run ```bash create_data.sh``` , which will generate the LMDB in Dataset directory.
+4. run ```bash create_list.sh```, which will create trainval.txt, test.txt and test_name_size.txt
+5. run ```bash create_data.sh```, which will generate the LMDB in Dataset directory.
 6. Delete trainval.txt, test.txt, test_name_size.txt before creation of next LMDB.
 
-LMDB Creation part is taken from https://github.com/jinfagang/kitti-ssd
+> - LMDB Creation part is taken from https://github.com/jinfagang/kitti-ssd
 
 
 ### Train your own dataset
