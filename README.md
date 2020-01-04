@@ -12,6 +12,18 @@ MobileNet-SSD|72.7|[train](https://drive.google.com/open?id=0B3gersZ2cHIxVFI1Rjd
 4. Run demo.py to show the detection result.
 5. You can run merge_bn.py to generate a no bn model, it will be much faster.
 
+### Create LMDB for your own dataset
+1. Place the Images directory and Labels directory into same directory. (Each image in Images folder should have a unique label file in Labels folder with same name)
+2. ```cd create_lmdb/code```
+3. Modify the labelmap.prototxt file according to your classes.
+4. Modify the paths and directories in create_list.sh and create_data.sh as specified in same file in comments.
+5. run ```bash create_list.sh```, which will create trainval.txt, test.txt and test_name_size.txt
+6. run ```bash create_data.sh```, which will generate the LMDB in Dataset directory.
+7. Delete trainval.txt, test.txt, test_name_size.txt before creation of next LMDB.
+
+> - LMDB Creation part is taken from https://github.com/jinfagang/kitti-ssd
+
+
 ### Train your own dataset
 1. Convert your own dataset to lmdb database (follow the SSD README), and create symlinks to current directory.
 ```
