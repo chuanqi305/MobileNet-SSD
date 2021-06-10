@@ -67,7 +67,7 @@ done
 for i in ${arr[@]:${boundry}:((${length_imgs}-${boundry}))}
 do
 	line=`sed -n -e "${i}p" ${dst_all_tmp}|cut -d ' ' -f 1`
-	size=`identify ${data_root_dir}${line}|cut -d ' ' -f 3|sed -e "s/x/ /"`
+	size=`identify ${data_root_dir}${line}|cut -d ' ' -f 3|sed -e "s/x/ /" | sed -r 's/([^ ]+) (.*)/\2 \1/'`
 	echo ${line}
 	name=`basename ${line} .png`
 	echo ${name}" "${size} >> ${dst_file_test_name_size}
