@@ -3,7 +3,7 @@ A caffe implementation of MobileNet-SSD detection network, with pretrained weigh
 
 Network|mAP|Download|Download
 :---:|:---:|:---:|:---:
-MobileNet-SSD|72.7|[train](https://drive.google.com/open?id=0B3gersZ2cHIxVFI1Rjd5aDgwOG8)|[deploy](https://drive.google.com/open?id=0B3gersZ2cHIxRm5PMWRoTkdHdHc)
+MobileNet-SSD|72.7|[train](https://drive.google.com/file/d/0B3gersZ2cHIxVFI1Rjd5aDgwOG8/view?usp=sharing&resourcekey=0-06X5rxeA-Wg6pg3UIeF5og)|[deploy](https://drive.google.com/file/d/0B3gersZ2cHIxRm5PMWRoTkdHdHc/view?usp=sharing&resourcekey=0-1Lpfs4EvGDeCQz12AF64hQ)
 
 ### Run
 1. Download [SSD](https://github.com/weiliu89/caffe/tree/ssd) source code and compile (follow the SSD README).
